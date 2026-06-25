@@ -1,0 +1,14 @@
+#arquivo = open("texto.txt", encoding="utf-8")
+#conteudo = arquivo.read()
+#print(conteudo)
+#arquivo.close()
+
+
+with open("texto.txt" , "r", encoding="utf-8") as arquivo:
+    conteudo = arquivo.read()
+    print(conteudo)
+
+with open ("texto.txt", "a",encoding="utf-8") as arquivo:
+    texto = "\n despacito."
+    arquivo.write(texto)
+    

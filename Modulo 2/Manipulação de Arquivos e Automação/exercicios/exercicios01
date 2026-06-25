@@ -1,0 +1,65 @@
+import csv
+import os
+
+ARQUIVO = "alunos.csv"
+
+if not os.path.exists(ARQUIVO):
+    with open(ARQUIVO, "w", newline="", encoding="utf-8") as arquivo:
+        escritor = csv.writer(arquivo)
+        escritor.writerow(["Nome", "Idade", "Nota"])
+
+
+def cadastrar_aluno():
+    nome = input("Nome do aluno: ")
+    idade = input("Idade: ")
+    nota = float(input("Nota: "))
+
+    with open(ARQUIVO, "a", newline="", encoding="utf-8") as arquivo:
+        escritor = csv.writer(arquivo)
+        escritor.writerow([nome, idade, nota])
+
+    print("Aluno cadastrado com sucesso!")
+
+
+def listar_alunos():
+    print("\n=== LISTA DE ALUNOS ===")
+
+    with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+        leitor = csv.reader(arquivo)
+        next(leitor)  
+        for linha in leitor:
+            print(f"Nome: {linha[0]} | Idade: {linha[1]} | Nota: {linha[2]}")
+
+
+def alunos_acima_de_8():
+    print("\n=== ALUNOS COM NOTA ACIMA DE 8 ===")
+
+    with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+        leitor = csv.reader(arquivo)
+        next(leitor)
+
+        for linha in leitor:
+            if float(linha[2]) > 8:
+                print(f"Nome: {linha[0]} | Idade: {linha[1]} | Nota: {linha[2]}")
+
+
+while True:
+    print("\n===== SISTEMA DE NOTAS FABPROG =====")
+    print("[1] Cadastrar aluno e nota")
+    print("[2] Lista alunos")
+    print("[3] Lista alunos com nota acima de 8")
+    print("[0] Sair")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        cadastrar_aluno()
+    elif opcao == "2":
+        listar_alunos()
+    elif opcao == "3":
+        alunos_acima_de_8()
+    elif opcao == "0":
+        print("Programa encerrado.")
+        break
+    else:
+        print("Opção inválida!")
